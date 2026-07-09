@@ -1,3 +1,3 @@
-<img src="simvader.png" width="700" alt="Simvader logo">
+<img src="simvader.png" width="400" alt="Simvader logo">
 
-# simvader
+# 
