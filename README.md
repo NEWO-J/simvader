@@ -20,6 +20,27 @@ logs every tool call, and enforces an allow/deny policy, rather than waiting 30+
 
 ![simvader blocking an MCP attack](demo.gif)
 
+<details>
+<summary><b>Table of Contents</b></summary>
+
+- [Features](#features)
+- [Quickstart](#quickstart)
+- [See it block an attack](#see-it-block-an-attack)
+- [Why it exists](#why-it-exists)
+- [Configure many servers](#configure-many-servers)
+- [Run as an HTTP service](#run-as-an-http-service)
+- [Observe, learn, enforce](#observe-learn-enforce)
+- [What it catches](#what-it-catches)
+- [Audit log](#audit-log)
+- [Performance](#performance)
+- [Flags](#flags)
+- [Internals](#internals)
+- [Limitations](#limitations)
+- [Background](#background)
+- [Development](#development)
+
+</details>
+
 ## Features
   - **Blocks injection attacks in the call path.** SSRF, command injection, SQL
     injection, path traversal, and code injection, stopped before the server sees them.
