@@ -18,7 +18,7 @@ your agent and its [MCP](https://modelcontextprotocol.io/) tools. It blocks tain
 (SSRF, command injection, SQL injection, path traversal, code injection) before they reach a server,
 logs every tool call, and enforces an allow/deny policy. Secure your MCP pipeline today rather than waiting 30+ days for upstream patches.
 
-*Demo - both sides use a real Claude Haiku 4-5 agent with a vulnerable MCP & the same prompt, one uses Simvader.*
+*Demo - both sides use a real Claude Haiku 4-5 agent with a vulnerable MCP & the same prompt, the right side uses Simvader.*
 ![simvader blocking an MCP attack](simvader_demo.gif)
 
 <details>
