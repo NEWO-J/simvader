@@ -18,7 +18,7 @@ your agent and its [MCP](https://modelcontextprotocol.io/) tools. It blocks prom
 (SSRF, command injection, SQL injection, path traversal, code injection) before they reach a server,
 logs every tool call, and enforces an allow/deny policy, rather than waiting 30+ days for upstream patches.
 
-![simvader blocking an MCP attack](demo.gif)
+![simvader blocking an MCP attack](simvader_demo.gif)
 
 <details>
 <summary><b>Table of Contents</b></summary>
