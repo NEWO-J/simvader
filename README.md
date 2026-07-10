@@ -106,7 +106,7 @@ The MCP ecosystem is full of servers built fast and shared early, often as proto
 validation as an afterthought. You want to use them now, and you cannot audit or patch code you did
 not write.
 
-A study of disclosed MCP server bugs [arXiv:2607.07461](https://arxiv.org/abs/2607.07461))
+A study of disclosed MCP server bugs [arXiv:2607.07461](https://arxiv.org/abs/2607.07461)
 found:
 
 - 81% are taint-style: untrusted input reaches a risky action.
