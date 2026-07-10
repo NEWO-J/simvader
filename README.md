@@ -13,7 +13,7 @@ Run untrusted / community-built MCP servers securely.
 
 #
 
-Many MCP servers are built with security as an afterthought. In fact, [only ~7% of MCP tool descriptions include explicit security guidance](https://arxiv.org/abs/2607.07461). *Simvader* is a gateway that sits between
+Many MCP servers are built with security as an afterthought. In fact, [only ~7% of MCP tool descriptions include explicit security guidance](https://arxiv.org/pdf/2607.07461). *Simvader* is a gateway that sits between
 your agent and its [MCP](https://modelcontextprotocol.io/) tools. It blocks taint/prompt-injection attacks
 (SSRF, command injection, SQL injection, path traversal, code injection) before they reach a server,
 logs every tool call, and enforces an allow/deny policy. Secure your MCP pipeline today rather than waiting 30+ days for upstream patches.
@@ -106,7 +106,7 @@ The MCP ecosystem is full of servers built fast and shared early, often as proto
 validation as an afterthought. You want to use them now, and you cannot audit or patch code you did
 not write.
 
-A study of disclosed MCP server bugs [arXiv:2607.07461](https://arxiv.org/abs/2607.07461)
+A study of disclosed MCP server bugs [arXiv:2607.07461](https://arxiv.org/pdf/2607.07461)
 found:
 
 - 81% are taint-style: untrusted input reaches a risky action.
@@ -260,7 +260,7 @@ The optional LLM check runs only on `suspicious` calls and is off by default.
 ## Background
 
 Based on "Mitigating Taint-Style Vulnerabilities in MCP Servers via Security-Aware Tool Descriptions",
-[arXiv:2607.07461](https://arxiv.org/abs/2607.07461). The paper's defense uses an LLM for
+[arXiv:2607.07461](https://arxiv.org/pdf/2607.07461). The paper's defense uses an LLM for
 the per-call check. simvader keeps the structure and makes the hot path deterministic, with the LLM as
 an optional escalation.
 
