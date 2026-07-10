@@ -43,7 +43,7 @@ logs every tool call, and enforces an allow/deny policy. Secure your MCP pipelin
 </details>
 
 ## Features
-  - **Blocks injection attacks in the call path.** SSRF, command injection, SQL
+  - **Blocks injection attacks in tool calls.** SSRF, command injection, SQL
     injection, path traversal, and code injection, stopped before the server sees them.
   - **Hands ambiguous calls back to your agent.** No guessing, no second LLM, no extra API key.
   - **Adds security notes to every tool.** It rewrites the description the model reads,
