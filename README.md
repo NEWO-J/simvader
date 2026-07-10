@@ -8,7 +8,7 @@
     <img alt="MCP" src="https://img.shields.io/badge/MCP-gateway-blue"/>
   </p>
 <p align="center">
-Simvader lets you run untrusted / community-built MCP servers securely.
+Run untrusted / community-built MCP servers securely.
 </p>
 
 #
