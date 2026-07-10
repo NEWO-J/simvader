@@ -1,9 +1,16 @@
 <p align="center">
-  <img src="simvader.png" width="500" alt="Simvader logo">
+  <img src="simvader.png" width="700" alt="Simvader logo">
+</p>
+<p align="center">
+    <a href="https://crates.io/crates/simvader"><img alt="crates.io" src="https://img.shields.io/crates/v/simvader"/></a>
+    <img alt="Rust" src="https://img.shields.io/badge/rust-1.75%2B-orange?logo=rust"/>
+    <img alt="License" src="https://img.shields.io/badge/license-MIT-green"/>
+    <img alt="MCP" src="https://img.shields.io/badge/MCP-gateway-blue"/>
+  </p>
 
-
+<p align="center">
 Simvader lets you run untrusted MCP servers safely.
-
+</p>
 Most MCP servers are built with security as an afterthought. [Only 7% of their tool descriptions include explicit security guidance](https://arxiv.org/abs/2607.07461). simvader is a gateway that sits between
 your agent and its [MCP](https://modelcontextprotocol.io/) tools. It blocks prompt-injection attacks
 (SSRF, command injection, SQL injection, path traversal, code injection) before they reach a server,
