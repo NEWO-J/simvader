@@ -1,4 +1,6 @@
-<img src="simvader.png" width="500" alt="Simvader logo">
+<p align="center">
+  <img src="simvader.png" width="500" alt="Simvader logo">
+
 
 Simvader lets you run untrusted MCP servers safely.
 
