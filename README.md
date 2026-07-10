@@ -42,6 +42,8 @@ logs every tool call, and enforces an allow/deny policy, rather than waiting 30+
 - **Too fast to notice.** The simvader layer is built in rust, and only adds about 0.3 µs per call (p99 ~1.2 µs), so it disappears next to an MCP round
   trip.
 
+![Simvader diagram](simvader_diagram.png)
+
 ## Quickstart
 
 Requires Rust.
