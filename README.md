@@ -21,26 +21,17 @@ logs every tool call, and enforces an allow/deny policy, rather than waiting 30+
 ![simvader blocking an MCP attack](demo.gif)
 
 ## Features
-- **Blocks taint-style attacks in real time** in the call path: SSRF, command injection, SQL injection, path
-  traversal, and code injection. It normalizes each argument first, so encoded bypasses fold to one
-  rule. `http://2852039166/` and `http://0xA9FEA9FE/` resolve to the same blocked address as
-  `http://169.254.169.254/`.
-- **Hands ambiguous calls back to your agent.** When a call looks risky but is not clearly an attack,
-  simvader does not guess. It returns the call to the agent as a tool result and asks it to reconsider,
-  now with the risk spelled out. The agent decides again with full context. If it re-issues the same
-  call, simvader lets it through and logs it, or blocks it in strict mode. No extra API key, and no
-  LLM on the fast path.
-- **Adds security notes to every tool.** Most MCP tools ship no security guidance at all. simvader
-  rewrites the description the model reads, spelling out each tool's risky inputs and what to refuse,
-  so the model steers away from the unsafe call before the guard runs.
-- **Writes your policy for you.** Run it in front of your agents and it learns an allow list from real
-  traffic. Turn on enforcement and anything off the list is denied.
-- **One command to protect a client.** `simvader install` wraps every MCP server in your Claude Desktop
-  config and backs up the original.
-- **Full audit log.** One JSON line per tool call: tool, decision, reason, CWE. Pipe it to a SIEM.
-- **stdio or HTTP.** Run it as a local subprocess or a network service.
-- **Too fast to notice.** The simvader layer is built in rust, and only adds about 0.3 µs per call (p99 ~1.2 µs), so it disappears next to an MCP round
-  trip.
+  - **Blocks injection attacks in the call path.** SSRF, command injection, SQL
+    injection, path traversal, and code injection, stopped before the server sees them.
+  - **Hands ambiguous calls back to your agent.** No guessing, no second LLM, no extra API key.
+  - **Adds security notes to every tool.** It rewrites the description the model reads,
+    so the model avoids the unsafe call before the guard runs.
+  - **Learns your policy from real traffic.** Turn on enforcement and anything off the list is denied.
+  - **One command to protect a client.** `simvader install` wraps every MCP server in
+    your Claude Desktop config and backs up the original.
+  - **Full audit log.** One JSON line per tool call: tool, decision, reason, CWE. Pipe it to a SIEM.
+  - **stdio or HTTP.** Local subprocess or network service, same guard either way.
+  - **0.3 µs per call.** p99 ~1.2 µs, invisible next to an MCP round trip
 
 ![Simvader diagram](simvader_diagram.png)
 
