@@ -16,8 +16,7 @@ Simvader lets you run untrusted / community-built MCP servers securely.
 Many MCP servers are built with security as an afterthought. In fact, [only ~7% of MCP tool descriptions include explicit security guidance](https://arxiv.org/abs/2607.07461). simvader is a gateway that sits between
 your agent and its [MCP](https://modelcontextprotocol.io/) tools. It blocks prompt-injection attacks
 (SSRF, command injection, SQL injection, path traversal, code injection) before they reach a server,
-logs every tool call, and enforces an allow/deny policy. It needs no changes to the servers it
-protects.
+logs every tool call, and enforces an allow/deny policy, rather than waiting 30+ days for upstream patches.
 
 ![simvader blocking an MCP attack](demo.gif)
 
