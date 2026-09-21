@@ -229,12 +229,16 @@ The optional LLM check runs only on `suspicious` calls and is off by default.
 - `--audit` log calls but let them all through. Turn on blocking when you trust it.
 - `--audit-log <path>` write one JSON line per call to a file.
 - `--policy <path>` load an allow/deny list. An allow list is deny-by-default.
+- `--default-deny` refuse any call the policy does not explicitly allow. Use with `--policy`.
 - `--learn` watch traffic and write a suggested allow list on exit (turns on `--audit`).
 - `--reflect` on a `suspicious` call, hand it back to the agent to reconsider (return a reflection
   tool result) instead of guessing. Allow an identical re-issue and log it. No API key needed.
 - `--reflect-strict` like `--reflect`, but block an identical re-issue instead of allowing it.
 - `--reflect-llm` send `suspicious` calls to a fast Claude model for a yes/no. Needs `ANTHROPIC_API_KEY`
   and a build with `--features llm`. Set the model with `SIMVADER_REFLECT_MODEL`.
+- `--fail-closed` deny `suspicious` calls instead of allowing them, when no reflector is configured.
+- `--resolve` resolve hostnames through DNS during SSRF checks, to catch domains pointing at internal
+  addresses. Adds a blocking lookup, so it is off by default.
 - `--no-augment` do not rewrite tool descriptions.
 - `-v`, `--verbose` print each verdict to stderr.
 
@@ -254,7 +258,8 @@ The optional LLM check runs only on `suspicious` calls and is off by default.
   server, and a server reached outside the gateway is not covered.
 - It covers the taint class (81% of the bugs), not access-control bugs or DNS rebinding.
 - The guard is a heuristic. Normalization closes the encoding tricks, but DNS rebinding and
-  open-redirect SSRF need a DNS lookup on the fetch path, deferred to a `--resolve` flag.
+  open-redirect SSRF need a DNS lookup on the fetch path, which `--resolve` adds at the cost of a
+  blocking lookup.
 - The HTTP transport returns JSON only. It does not stream server-sent events yet (notifications,
   sampling). Downstreams are stdio child processes; remote HTTP downstreams are not wired yet.
 
@@ -268,7 +273,7 @@ an optional escalation.
 ## Development
 
 ```sh
-cargo test                       # 33 tests: engine, normalization, policy, audit, gateway, install
+cargo test                       # 52 tests: engine, normalization, policy, audit, gateway, install, cli
 cargo run --release --example bench_guard
 cargo build --features llm
 ```
