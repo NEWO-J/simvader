@@ -59,6 +59,13 @@ struct CommonFlags {
     /// Do not augment tool descriptions with security guidance.
     #[arg(long)]
     no_augment: bool,
+    /// Return ambiguous (Suspicious) calls to the agent as a reflection tool result so it
+    /// reconsiders with its own context. An identical re-issue is allowed and logged.
+    #[arg(long)]
+    reflect: bool,
+    /// Like --reflect, but block an identical re-issue instead of allowing it.
+    #[arg(long)]
+    reflect_strict: bool,
     /// Escalate ambiguous (Suspicious) calls to an LLM reflector (needs ANTHROPIC_API_KEY;
     /// requires building with `--features llm`).
     #[arg(long)]
@@ -99,9 +106,11 @@ impl CommonFlags {
             audit: self.audit,
             augment: !self.no_augment,
             verbose: self.verbose,
-            // TODO(reflect-cli): no `--reflect ask/askstrict` flag is wired yet; default to the
-            // neutral Off mode (escalation still honours `--reflect-llm` via the reflector).
-            reflect: gateway::ReflectMode::Off,
+            reflect: match (self.reflect_strict, self.reflect) {
+                (true, _) => gateway::ReflectMode::AskStrict,
+                (false, true) => gateway::ReflectMode::Ask,
+                (false, false) => gateway::ReflectMode::Off,
+            },
             default_deny: self.default_deny,
             resolve: self.resolve,
         }
@@ -197,5 +206,41 @@ fn main() -> std::io::Result<()> {
         Command::Uninstall { config, client_config, dry_run } => {
             install::uninstall(InstallOptions { simvader_config: config, client_config, dry_run })
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn flags_from(args: &[&str]) -> CommonFlags {
+        let mut argv = vec!["simvader", "run"];
+        argv.extend_from_slice(args);
+        argv.extend_from_slice(&["--", "server"]);
+        match Cli::parse_from(argv).command {
+            Command::Run { flags, .. } => flags,
+            _ => unreachable!("parsed a run command"),
+        }
+    }
+
+    #[test]
+    fn maps_reflect_flags_to_modes() {
+        assert_eq!(flags_from(&[]).to_options().reflect, gateway::ReflectMode::Off);
+        assert_eq!(flags_from(&["--reflect"]).to_options().reflect, gateway::ReflectMode::Ask);
+        assert_eq!(
+            flags_from(&["--reflect-strict"]).to_options().reflect,
+            gateway::ReflectMode::AskStrict
+        );
+        assert_eq!(
+            flags_from(&["--reflect", "--reflect-strict"]).to_options().reflect,
+            gateway::ReflectMode::AskStrict
+        );
+    }
+
+    #[test]
+    fn reflect_llm_does_not_set_an_inline_mode() {
+        let flags = flags_from(&["--reflect-llm"]);
+        assert_eq!(flags.to_options().reflect, gateway::ReflectMode::Off);
+        assert!(flags.reflect_llm);
     }
 }
